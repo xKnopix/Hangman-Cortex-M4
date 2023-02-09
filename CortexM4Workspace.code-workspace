@@ -1,0 +1,30 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"actionButtons": {
+			"reloadButton": null,
+			"defaultColor": "white",
+			"useScripts": true,
+			"npmClient": "npm",
+			"monorepo": true,
+			"commands": [
+			  {
+				"name": "Generate",
+				"color": "#aaaaff",
+				"command": "cmake -G Unix Makefiles --preset arm-cortex-m4",
+				"singleInstance": true
+			  },
+			  {
+				"name": "Build",
+				"color": "#aaffaa",
+				"command": "cmake --build --preset arm-cortex-m4",
+				"singleInstance": true
+			  }
+			]
+		  }
+	}
+}
