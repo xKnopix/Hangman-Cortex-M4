@@ -2,7 +2,6 @@
 #define UART_H
 
 #include <stdint.h>
-#include "main.h"
 
 
 // for Init the UART:

@@ -18,7 +18,8 @@ target_sources(
     entry_c.c
     main.c
     uart.c
-    registers.c )
+    registers.c
+    io.c )
 
 target_link_options(
   testApp
