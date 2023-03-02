@@ -13,10 +13,10 @@
 static uint32_t counter = 0;//global
 static uint32_t countermain = 0;
 
-int check(char guess, char *new_name, char *new_empty_name, int lang)
+uint32_t check(char guess, char *new_name, char *new_empty_name, uint32_t lang)
 {
-    int counter=0;
-    for(int i = 0; i<lang; i++)
+    uint32_t counter=0;
+    for(uint32_t i = 0; i<lang; i++)
     {
         if(guess>=97)
         {
@@ -53,15 +53,15 @@ int check(char guess, char *new_name, char *new_empty_name, int lang)
 
 void main(void){
     printWelcomeHangman();
-    char* userInput = getWordInput();
-    int strich;
-    int accept;
+    uint32_t lang;
+    char* userInput = getWordInput(&lang);
+    uint32_t strich;
+    uint32_t accept;
     char guess;
-    int Bedingung;
-    int lang=sizeof(userInput);
+    uint32_t Bedingung;
     lang=lang+1;
     char new_empty_name[lang];
-    for(int z=0;z< lang;z++)
+    for(uint32_t z=0;z< lang;z++)
     {
         new_empty_name[z]='-';
     }
@@ -71,7 +71,7 @@ void main(void){
 
         guess=read_input();
 
-        int q=check(guess, userInput, new_empty_name, lang);
+        uint32_t q=check(guess, userInput, new_empty_name, lang);
         accept=accept+q;
         if(q==0)
         {
