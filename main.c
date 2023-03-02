@@ -64,6 +64,7 @@ void main(void){
     {
         new_empty_name[z]='-';
     }
+    new_empty_name[lang] = '\0';
     while(strich <10 && accept!=lang)
     {
         printString("\033[0;0H");
