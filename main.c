@@ -79,6 +79,7 @@ void main(void){
             versuchen[10]=guess;
             printString(versuchen);
             strich++;
+            printFails(strich);
         }
         else
         {

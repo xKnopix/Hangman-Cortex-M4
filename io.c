@@ -84,8 +84,9 @@ char* getWordInput(void){
     char* t = textInput;
 
     return t;
-    
-    void printFails(int failCount)
+}
+
+void printFails(int failCount)
     {
       switch(failCount)
       {
