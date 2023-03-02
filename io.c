@@ -27,7 +27,7 @@ void printWelcomeHangman(void){
     
    
 }
-
+//neu
 void printEndMessage(void){
     //Setze Farbe auf Grün(32) und Hintergrund schwarz(40) 2 = dim/faint mode.
     printString("\033[2;32;40m");
