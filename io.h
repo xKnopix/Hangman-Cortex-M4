@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-char* getWordInput(void); //Überprufen ob String ohne Zahlen usw. 
+char* getWordInput(uint32_t *size); //Überprufen ob String ohne Zahlen usw.
 uint8_t getReplay(void);
 void printWelcomeHangman(void);
 void printHangman(uint8_t mistakes, char input[]);// [--ll-]
