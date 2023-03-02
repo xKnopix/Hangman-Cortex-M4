@@ -42,7 +42,9 @@ void printEndMessage(void){
 
 }
 
-char* getWordInput(void){
+char* getWordInput(uint32_t *size){
+
+
     
     //Setze Farbe auf Grün(32) und Hintergrund schwarz(40) 2 = dim/faint mode.
     printString("\033[2;32;40m");
@@ -71,6 +73,7 @@ char* getWordInput(void){
         if(c != ' ' && c != '1'&& c != '2'&& c != '3'&& c != '4'&& c != '5'&& c != '6'&& c != '7'&& c != '8'&& c != '9'&& c != '0'){
             printString("\033[2K"); 
         }
+        *size = n;
 
     }
     printString("\033[2;32;40m");
@@ -84,6 +87,7 @@ char* getWordInput(void){
     char* t = textInput;
 
     return t;
+
 }
 
 void printFails(int failCount)
