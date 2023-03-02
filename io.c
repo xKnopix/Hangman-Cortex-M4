@@ -87,29 +87,38 @@ char* getWordInput(void){
 }
 
 void printFails(int failCount)
-    {
-      switch(failCount)
-      {
-        case 1:
-          printFailOne();
-        case 2:
-          printFailTwo();
-        case 3:
-          printFailThree();
-        case 4:
-          printFailFour();
-        case 5:
-          printFailFive();
-        case 6:
-          printFailSix();
-        case 7:
-          printFailSeven();
-        case 8:
-          printFailEight();
-        case 9:
-          printFailNine();
-      }
-    }
+{
+  switch(failCount)
+  {
+    case 1:
+      printFailOne();
+      break;
+    case 2:
+      printFailTwo();
+      break;
+    case 3:
+      printFailThree();
+      break;
+    case 4:
+      printFailFour();
+      break;
+    case 5:
+      printFailFive();
+      break;
+    case 6:
+      printFailSix();
+      break;
+    case 7:
+      printFailSeven();
+      break;
+    case 8:
+      printFailEight();
+      break;
+    case 9:
+      printFailNine();
+      break;
+  }
+}
     void printFailOne(void)
     {
       printString("\033[2;32;40m");
