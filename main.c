@@ -79,7 +79,7 @@ void main(void){
         {
             //printString("\033[2J");
             printString("\033[0;0H");
-            printString("\033[17B");
+            printString("\033[18B");
             char versuchen[] ={"Sorry but   is not in the word\n"};
             versuchen[10]=guess;
             printString(versuchen);
