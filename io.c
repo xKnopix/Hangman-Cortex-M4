@@ -84,5 +84,109 @@ char* getWordInput(void){
     char* t = textInput;
 
     return t;
+    
+    
+    void printFailOne(void)
+    {
+      printString("\033[2;32;40m");
+      printString("\033[2J");
+      printString("\033[1;0H");
+
+      printString("\033[11;0f");
+      printString("\033[1A       ____________");
+      printString("     /\\___________/\\");
+      printString("    / /   _____   \\ \\");
+      printString("   / /   /     \\   \\ \\");
+      printString("  / /   /       \\   \\ \\");
+      printString(" / /   /         \\   \\ \\");
+      printString(" \\/___/           \\___\\/");
+    }
+
+    void printFailTwo(void)
+    {
+      printString("\033[2;32;40m");
+      //printString("\033[2J");
+      printString("\033[1;0H");
+
+      printString("\033[0;0f");
+      printString("\033[1A            ___");
+      printString("           /__/|");
+      printString("          |   ||");
+      printString("          |   ||");
+      printString("          |   ||");
+      printString("          |   ||");
+      printString("          |   ||");
+      printString("          |   ||");
+      printString("          |   ||");
+      printString("          |   ||");
+      printString("\033[10C|   ||");
+      printString("\033[10C|\033[3C|/");
+    }
+    void printFailThree(void)
+    {
+      printString("\033[2;32;40m");
+      //printString("\033[2J");
+      printString("\033[1;0H");
+
+      printString("\033[0;13f_______________");
+      printString("\033[12C______________/|");
+      printString("\033[11C               ||");
+      printString("\033[11C    ___________|/");
+    }
+    void printFailFour(void)
+    {
+      printString("\033[2;32;40m");
+      //printString("\033[2J");
+      printString("\033[1;0H");
+
+      printString("\033[5;17f/ //");
+      printString("\033[6;16f/ //");
+      printString("\033[7;16f //");
+      printString("\033[8;16f//");
+      printString("\033[9;16f/");
+    }
+    void printFailFive(void)
+    {
+      printString("\033[2;32;40m");
+      //printString("\033[2J");
+      printString("\033[1;0H");
+
+      printString("\033[5;25f//");
+      printString("\033[6;25f\\\\");
+      printString("\033[7;25f//");
+    }
+    void printFailSix(void)
+    {
+      printString("\033[2;32;40m");
+      //printString("\033[2J");
+      printString("\033[1;0H");
+
+      printString("\033[8;25fO");
+    }
+    void printFailSeven(void)
+    {
+      printString("\033[2;32;40m");
+      //printString("\033[2J");
+      printString("\033[1;0H");
+
+      printString("\033[9;25f|");
+      printString("\033[10;25f|");
+    }
+    void printFailEight(void)
+    {
+      printString("\033[2;32;40m");
+      //printString("\033[2J");
+      printString("\033[1;0H");
+
+      printString("\033[9;24f\\\033[1C/");
+    }
+    void printFailNine(void)
+    {
+      printString("\033[2;32;40m");
+      //printString("\033[2J");
+      printString("\033[1;0H");
+
+      printString("\033[11;24f/ \\");
+    }
 
 }
