@@ -68,7 +68,7 @@ void main(void){
     while(strich <10 && accept!=lang)
     {
         printString("\033[0;0H");
-        printString("\033[19B");
+        //printString("\033[19B");
         printString("Please enter a guess (single letter pls)\n");
 
         guess=read_input();
@@ -77,9 +77,9 @@ void main(void){
         accept=accept+q;
         if(q==0)
         {
-            printString("\033[2J");
+            //printString("\033[2J");
             printString("\033[0;0H");
-            printString("\033[20B");
+            printString("\033[17B");
             char versuchen[] ={"Sorry but   is not in the word\n"};
             versuchen[10]=guess;
             printString(versuchen);
@@ -88,9 +88,10 @@ void main(void){
         }
         else
         {
-            printString("\033[2J");
+            //printString("\033[2J");
             printString("\033[0;0H");
-            printString("\033[21B");
+            printFails(strich);
+            printString("\033[19B");
                 printString(new_empty_name);
                 printString("\n");
         }

@@ -129,11 +129,12 @@ void printFails(int failCount)
       printFailNine();
       break;
   }
+    printString("\033[0;0H");
 }
     void printFailOne(void)
 {
   printString("\033[2;32;40m");
-  printString("\033[2J");
+  //printString("\033[2J");
   printString("\033[4;0H");
 
   printString("\033[14;0f");
