@@ -9,6 +9,7 @@ void printWelcomeHangman(void);
 void printHangman(uint8_t mistakes, char input[]);// [--ll-]
 void printEndMessage(void);
 
+void printFails(int failCount);
 void printFailOne(void);
 void printFailTwo(void);
 void printFailThree(void);
