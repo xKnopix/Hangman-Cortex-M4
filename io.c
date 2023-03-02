@@ -76,6 +76,13 @@ char* getWordInput(uint32_t *size){
         *size = n;
 
     }
+
+    if(n ==20){
+      printString("Die maximale Laenge wurde erreicht druecke Enter...");
+      while (c != '\r'){
+        c = read_input();
+      }
+    }
     printString("\033[2;32;40m");
     //Lösche alle Zeichen
     printString("\033[2J");
