@@ -59,7 +59,6 @@ void main(void){
     uint32_t accept;
     char guess;
     uint32_t Bedingung;
-    lang=lang+1;
     char new_empty_name[lang];
     for(uint32_t z=0;z< lang;z++)
     {
@@ -67,6 +66,8 @@ void main(void){
     }
     while(strich <10 && accept!=lang)
     {
+        printString("\033[0;0H");
+        printString("\033[19B");
         printString("Please enter a guess (single letter pls)\n");
 
         guess=read_input();
@@ -75,6 +76,9 @@ void main(void){
         accept=accept+q;
         if(q==0)
         {
+            printString("\033[2J");
+            printString("\033[0;0H");
+            printString("\033[20B");
             char versuchen[] ={"Sorry but   is not in the word\n"};
             versuchen[10]=guess;
             printString(versuchen);
@@ -83,6 +87,9 @@ void main(void){
         }
         else
         {
+            printString("\033[2J");
+            printString("\033[0;0H");
+            printString("\033[21B");
                 printString(new_empty_name);
                 printString("\n");
         }

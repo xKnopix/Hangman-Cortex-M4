@@ -89,7 +89,7 @@ char* getWordInput(uint32_t *size){
     printString("\033[0;0H");
 
     // Null-Terminierung hinzufügen
-    textInput[n] = '\0';
+    //textInput[n] = '\0';
 
     char* t = textInput;
 
