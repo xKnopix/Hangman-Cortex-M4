@@ -53,6 +53,12 @@ char* getWordInput(uint32_t *size){
 
     printString("Geben Sie das Wort ein, welches erraten werden soll");
     char textInput[100];
+
+    for ( int n = 0; textInput[n] != 0; n++ )
+      {
+        textInput[n] = ' ';
+      }
+
     int n = 0;
 
     printString("\033[2;37;40m");
