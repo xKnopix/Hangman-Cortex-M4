@@ -13,19 +13,19 @@
 static uint32_t counter = 0;//global
 static uint32_t countermain = 0;
 
-uint32_t check(char guess, char *alreadyGuessed, char *new_name, char *new_empty_name, uint32_t lang, uint32_t round)
+uint32_t check(char guess, char *alreadyGuessed, char *new_name, char *guessWordProgress, uint32_t round)
 {
     uint32_t counter=0;
-    for(uint32_t i = 0; i<lang; i++)
+    for(uint32_t i = 0; new_name[i] != 0; i++)
     {
         if(guess>=97)
         {
             if (new_name[i] == guess) {
-                new_empty_name[i] = guess;
+                guessWordProgress[i] = guess;
                 counter++;
             } else {
                 if (new_name[i] == guess - 32) {
-                    new_empty_name[i] = guess - 32;
+                    guessWordProgress[i] = guess - 32;
                     counter++;
                 }
             }
@@ -34,14 +34,14 @@ uint32_t check(char guess, char *alreadyGuessed, char *new_name, char *new_empty
             {
                 if(new_name[i]== guess)
                 {
-                    new_empty_name[i]=guess;
+                    guessWordProgress[i]=guess;
                     counter++;
                 }
                 else
                 {
                     if(new_name[i]==guess+32)
                     {
-                        new_empty_name[i]= guess+32;
+                        guessWordProgress[i]= guess+32;
                         counter++;
                     }
                 }
@@ -62,62 +62,67 @@ uint32_t check(char guess, char *alreadyGuessed, char *new_name, char *new_empty
 
 void main(void){
     printWelcomeHangman();
-    uint32_t lang = 0;
+    uint32_t wordLength = 0;                                    //Integer in welchem die Länge des zu ratenden Wortes gespeichert wird
     
-    uint32_t ON = 1;
-    uint32_t OFF = 0;
-    uint32_t game = ON;
+    uint32_t ON = 1;                                            //Integer zur Besseren Lesbarkeit des Codes
+    uint32_t OFF = 0;                                           //                  ||
+    uint32_t game = ON;                                         //                  ||
+    uint32_t wrong = 0;                                         //                  ||
+
     while(game == ON)
-    {
-        char alreadyGuessed[26];
-        for ( int n = 0; alreadyGuessed[n] != 0; n++ )
+    {   
+        uint32_t    failCount = 0,
+                    correctGuessCounter = 0,
+                    guesses = 0,
+                    guessResult = 0;
+
+        char alreadyGuessed[26];                                //Array für bereits geratene Buchstaben zur Überprüfung doppelter Eingaben
+        char guess;
+
+        for ( int n = 0; alreadyGuessed[n] != 0; n++ )          //Den Array leeren, dass keine Eingaben bei einem Spielneustart vorhanden sind
         {
             alreadyGuessed[n] = ' ';
         }
 
-        char* userInput = getWordInput(&lang);
-        uint32_t strich = 0;
-        uint32_t accept = 0;
-        char guess;
-        uint32_t Bedingung = 0;
-        char new_empty_name[lang];
-        uint32_t guesses = 0;
+        char* userInput = getWordInput(&wordLength);            //Hole von einem Spieler das Wort, welches erraten werden soll
 
-        for(uint32_t z=0;z< lang;z++)
+        char guessWordProgress[wordLength];
+
+        
+        
+
+        for(uint32_t z=0;z< wordLength;z++)
         {
-            new_empty_name[z]='-';
+            guessWordProgress[z]='-';
         }
-        new_empty_name[lang] = '\0';
-        while(strich <9 && accept!=lang)
+        guessWordProgress[wordLength] = '\0';
+        while(failCount <9 && correctGuessCounter!=wordLength)
         {
             printString("\033[0;0H"); //Cursor auf (0, 0)
-            //printString("\033[19B");
             printString("Please enter a guess (single letter pls)\n");
 
             guess=read_input();
 
-            uint32_t guessResult=check(guess, alreadyGuessed, userInput, new_empty_name, lang, guesses);
-            accept=accept+guessResult;
-            uint32_t wrong = 0;
+            guessResult=check(guess, alreadyGuessed, userInput, guessWordProgress, guesses);
+            correctGuessCounter=correctGuessCounter+guessResult;
+            
 
+            printString("\033[0;0H"); //Cursor auf (0 | 0)
             if(guessResult == wrong)
             {
-                //printString("\033[2J");
-                printString("\033[0;0H");
-                printString("\033[21B");
+                printString("\033[21B");    //Cursor auf Zeile 21
                 char versuchen[] ={"Sorry but   is not in the word\n"};
                 versuchen[10]=guess;
                 printString(versuchen);
-                strich++;
-                printFails(strich);
+                failCount++;
+                printFails(failCount);
             }
             else
             {
                 //printString("\033[2J");
-                printString("\033[0;0H"); //Cursor auf (0, 0)
-                printFails(strich);       //ASCII-Art entsprechend erweitern
-                printString("\033[19B");
-                printString(new_empty_name);
+                //printFails(failCount);       //ASCII-Art entsprechend erweitern
+                printString("\033[19B");    //Cursor auf Zeile 19
+                printString(guessWordProgress);
                 printString("\n");
             }
 
@@ -125,7 +130,7 @@ void main(void){
         }
     
     
-        if(strich>=9)
+        if(failCount>=9)
         {
             printString("\033[0;0H"); //Cursor auf (0, 0)
             printString("\033[21B");
@@ -139,7 +144,7 @@ void main(void){
         }
 
         char failText[] ={"Fails:   \n"};
-        char failChar = strich + '0';
+        char failChar = failCount + '0';
         failText[8]= failChar;
         printString(failText);
 
