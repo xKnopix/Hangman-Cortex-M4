@@ -6,8 +6,8 @@
 //#include "uart.h"
 //#include "registers.h"
 
-uint32_t time;
-uint32_t mainTime;
+static uint32_t time;
+static uint32_t mainTime;
 
 void resetClock (void);
 int32_t getCurrentTime();
