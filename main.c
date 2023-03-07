@@ -2,6 +2,7 @@
 #include "uart.h"
 #include "registers.h"
 #include "io.h"
+#include "clockticks.h"
 #include <stdint.h>
 #include <stdio.h>
 
@@ -61,6 +62,7 @@ uint32_t check(char guess, char *alreadyGuessed, char *new_name, char *guessWord
 
 
 void main(void){
+    startClock();
     printWelcomeHangman();
     uint32_t wordLength = 0;                                    //Integer in welchem die Länge des zu ratenden Wortes gespeichert wird
     
@@ -172,5 +174,8 @@ void main(void){
         }
         
     }
-    for(;;);
+    for(;;)
+    {
+       mainTime++;
+    }
 }

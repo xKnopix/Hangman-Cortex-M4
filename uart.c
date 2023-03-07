@@ -1,5 +1,6 @@
 #include "uart.h"
 #include "registers.h"
+#include "clockticks.h"
 // Specific implementation for ARM-Cortex M4 here:
 
 void uartInit( void )
@@ -49,11 +50,17 @@ void printStringWithLen( const char *text, int len )
 char read_input( void )
 {
   uint32_t DataRegister;
+  uint32_t startTime = getCurrentTime();
 
   // FE = "FIFO EMPTY"
   // Active wait for not Empty fifo
-  while ( readFromRegister( 0x4000C000 + 0x18 ) & 0x10 )
-    ;
+  while ( readFromRegister( 0x4000C000 + 0x18 ) & 0x10 ){
+    if ((getCurrentTime() - startTime) == 2000)
+    {
+      return '*';
+    }
+    
+  }
 
   // Read from UART_O_DR
   DataRegister = readFromRegister( 0x4000C000 + 0x00 );

@@ -16,6 +16,7 @@ target_sources(
   PRIVATE
     entry.S
     entry_c.c
+    clockticks.c
     main.c
     uart.c
     registers.c
