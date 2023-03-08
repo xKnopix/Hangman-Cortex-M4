@@ -147,10 +147,9 @@ void main(void){
                 printString("\n");
             }
 
-                
+            guesses++; 
             }
 
-            guesses++;
         
     
     

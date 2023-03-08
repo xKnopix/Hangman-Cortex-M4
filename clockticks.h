@@ -2,9 +2,6 @@
 #define CLOCKTICKS_H
 
 #include <stdint.h>
-//#include "main.h"
-//#include "uart.h"
-//#include "registers.h"
 
 static uint32_t time;
 static uint32_t mainTime;
