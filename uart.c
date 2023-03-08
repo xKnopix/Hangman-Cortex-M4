@@ -1,6 +1,7 @@
 #include "uart.h"
 #include "registers.h"
 #include "clockticks.h"
+#include "main.h"
 // Specific implementation for ARM-Cortex M4 here:
 
 void uartInit( void )
@@ -57,7 +58,8 @@ char read_input( void )
   while ( readFromRegister( 0x4000C000 + 0x18 ) & 0x10 ){
     if ((getCurrentTime() - startTime) == 1000)
     {
-      return '*';
+      setTimercondition(1);
+      return ' ';
     }
     
   }

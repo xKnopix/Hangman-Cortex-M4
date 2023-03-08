@@ -13,6 +13,12 @@
 
 static uint32_t counter = 0;//global
 static uint32_t countermain = 0;
+static uint32_t timercondition = 0;
+
+
+void setTimercondition( uint32_t condition){
+    timercondition = condition;
+}
 
 uint32_t check(char guess, char *alreadyGuessed, char *new_name, char *guessWordProgress, uint32_t round)
 {
@@ -93,6 +99,10 @@ void main(void){
         {
             userInput = getWordInput(&wordLength);            //Hole von einem Spieler das Wort, welches erraten werden soll
         }
+        failCount = 0;
+        guesses = 0;
+        resetClock();
+        setTimercondition(0);
         
         char guessWordProgress[wordLength];
 
@@ -107,10 +117,10 @@ void main(void){
         while(failCount <9 && correctGuessCounter!=wordLength)
         {
             printString("\033[0;0H"); //Cursor auf (0, 0)
-            printString("Please enter a guess (single letter pls)\n");
+            printString("Please enter a guess (if you take too long it's a guess)\n");
 
             guess = 0x00;
-            while (!((guess >=0x41 && guess<=0x5A)||(guess >=0x61 && guess<=0x7A)))
+            while (!((guess >=0x41 && guess<=0x5A)||(guess >=0x61 && guess<=0x7A)) && timercondition == 0)
             {
                 guess=read_input();
             }
@@ -121,7 +131,7 @@ void main(void){
             
 
             printString("\033[0;0H"); //Cursor auf (0 | 0)
-            if(guessResult == wrong && guess!='*')
+            if(guessResult == wrong && timercondition == 0)
             {
                 printString("\033[21B");    //Cursor auf Zeile 21
                 char versuchen[] ={"Sorry but   is not in the word                               \n"};
@@ -130,13 +140,14 @@ void main(void){
                 failCount++;
                 printFails(failCount);
             }
-            else if(guess=='*')
+            else if(timercondition == 1)
             {
                 printString("\033[21B");    //Cursor auf Zeile 21
                 char versuchen[] ={"You took to long to guess!                                   \n"};
                 printString(versuchen);
                 failCount++;
                 printFails(failCount);
+                setTimercondition(0);
             } 
             else
             {
@@ -144,7 +155,10 @@ void main(void){
                 //printFails(failCount);       //ASCII-Art entsprechend erweitern
                 printString("\033[19B");    //Cursor auf Zeile 19
                 printString(guessWordProgress);
+                printString(" ");    //Cursor auf Zeile 19
+                printString("\033[2K");
                 printString("\n");
+
             }
 
             guesses++; 
@@ -181,7 +195,7 @@ void main(void){
         guessText[18]= einerStelleChar;
         printString(guessText);
 
-        printString("Press [q] to quit the game or any other Key to Play again!");
+        printString("Press [q] to quit the game or any other Key to Play again or wait a few seconds!");
         char nextAction = read_input();
 
         if(nextAction == 'q')
