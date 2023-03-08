@@ -68,7 +68,7 @@ char* getWordInput(uint32_t *size){
     while (c != '\r' && n<20 ){
         //Setze Curser auf stelle 2|0
         printString("\033[2;0H");
-        if(c != ' ' && c != '1'&& c != '2'&& c != '3'&& c != '4'&& c != '5'&& c != '6'&& c != '7'&& c != '8'&& c != '9'&& c != '0'){
+        if((c >=0x41 && c<=0x5A)||(c >=0x61 && c<=0x7A)){
             textInput[n] = c;
             n++;
             printString(textInput);
@@ -76,11 +76,10 @@ char* getWordInput(uint32_t *size){
 
         c = read_input();
         //Lösche alle Zeichen in der Zeile
-        if(c != ' ' && c != '1'&& c != '2'&& c != '3'&& c != '4'&& c != '5'&& c != '6'&& c != '7'&& c != '8'&& c != '9'&& c != '0'){
+        if((c >=0x41 && c<=0x5A)||(c >=0x61 && c<=0x7A)){
             printString("\033[2K"); 
         }
         *size = n;
-
     }
 
     if(n ==20){

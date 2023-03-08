@@ -86,8 +86,14 @@ void main(void){
             alreadyGuessed[n] = ' ';
         }
 
-        char* userInput = getWordInput(&wordLength);            //Hole von einem Spieler das Wort, welches erraten werden soll
 
+        char* userInput = "";
+        wordLength = 0;
+        while (wordLength <1)
+        {
+            userInput = getWordInput(&wordLength);            //Hole von einem Spieler das Wort, welches erraten werden soll
+        }
+        
         char guessWordProgress[wordLength];
 
         
