@@ -110,15 +110,23 @@ void main(void){
             
 
             printString("\033[0;0H"); //Cursor auf (0 | 0)
-            if(guessResult == wrong)
+            if(guessResult == wrong && guess!='*')
             {
                 printString("\033[21B");    //Cursor auf Zeile 21
-                char versuchen[] ={"Sorry but   is not in the word\n"};
+                char versuchen[] ={"Sorry but   is not in the word                               \n"};
                 versuchen[10]=guess;
                 printString(versuchen);
                 failCount++;
                 printFails(failCount);
             }
+            else if(guess=='*')
+            {
+                printString("\033[21B");    //Cursor auf Zeile 21
+                char versuchen[] ={"You took to long to guess!                                   \n"};
+                printString(versuchen);
+                failCount++;
+                printFails(failCount);
+            } 
             else
             {
                 //printString("\033[2J");
@@ -128,8 +136,11 @@ void main(void){
                 printString("\n");
             }
 
+                
+            }
+
             guesses++;
-        }
+        
     
     
         if(failCount>=9)

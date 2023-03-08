@@ -55,7 +55,7 @@ char read_input( void )
   // FE = "FIFO EMPTY"
   // Active wait for not Empty fifo
   while ( readFromRegister( 0x4000C000 + 0x18 ) & 0x10 ){
-    if ((getCurrentTime() - startTime) == 2000)
+    if ((getCurrentTime() - startTime) == 1000)
     {
       return '*';
     }
