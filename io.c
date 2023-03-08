@@ -13,6 +13,7 @@ void printWelcomeHangman(void){
     printString("|/__\\|/__\\|/__\\|/__\\|/__\\|/__\\|/__\\|");
 
     printString("");
+    printString("Set View: Settings -> Change Screen Size -> Rows = 40");
     printString("Press Enter to start the game...");
 
     char c = read_input();
@@ -51,7 +52,8 @@ char* getWordInput(uint32_t *size){
     printString("\033[2J");
     printString("\033[1;0H");
 
-    printString("Enter a word...");
+    printString("Enter a word...(Can't be deleted using backspace)");
+    printString("Max Length: 20, only letters");
     char textInput[100];
 
     for ( int n = 0; textInput[n] != 0; n++ )
@@ -66,8 +68,8 @@ char* getWordInput(uint32_t *size){
     // Eingabe lesen, bis Enter gedrückt wird
     char c = read_input();
     while (c != '\r' && n<20 ){
-        //Setze Curser auf stelle 2|0
-        printString("\033[2;0H");
+        //Setze Curser auf stelle 3|0
+        printString("\033[3;0H");
         if((c >=0x41 && c<=0x5A)||(c >=0x61 && c<=0x7A)){
             textInput[n] = c;
             n++;
