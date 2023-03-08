@@ -109,7 +109,12 @@ void main(void){
             printString("\033[0;0H"); //Cursor auf (0, 0)
             printString("Please enter a guess (single letter pls)\n");
 
-            guess=read_input();
+            guess = 0x00;
+            while (!((guess >=0x41 && guess<=0x5A)||(guess >=0x61 && guess<=0x7A)))
+            {
+                guess=read_input();
+            }
+            
 
             guessResult=check(guess, alreadyGuessed, userInput, guessWordProgress, guesses);
             correctGuessCounter=correctGuessCounter+guessResult;

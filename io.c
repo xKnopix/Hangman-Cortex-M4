@@ -13,7 +13,7 @@ void printWelcomeHangman(void){
     printString("|/__\\|/__\\|/__\\|/__\\|/__\\|/__\\|/__\\|");
 
     printString("");
-    printString("Druecke Enter um das Spiel zu beginnen...");
+    printString("Press Enter to start the game...");
 
     char c = read_input();
     while (c != '\r')
@@ -51,7 +51,7 @@ char* getWordInput(uint32_t *size){
     printString("\033[2J");
     printString("\033[1;0H");
 
-    printString("Geben Sie das Wort ein, welches erraten werden soll");
+    printString("Enter a word...");
     char textInput[100];
 
     for ( int n = 0; textInput[n] != 0; n++ )
@@ -83,7 +83,7 @@ char* getWordInput(uint32_t *size){
     }
 
     if(n ==20){
-      printString("Die maximale Laenge wurde erreicht druecke Enter...");
+      printString("You have reached the max length. Press Enter to continue...");
       while (c != '\r'){
         c = read_input();
       }
