@@ -11,45 +11,63 @@
 #define CURRENTVALUEREGISTER 0xE000E018
 #define CALIBRATIONVALUEREGISTER 0xE000E01C
 
-static uint32_t counter = 0;//global
-static uint32_t countermain = 0;
-static uint32_t timercondition = 0;
+static uint32_t counter = 0;            
+static uint32_t countermain = 0;        
+static uint32_t timercondition = 0;     
 
 
 void setTimercondition( uint32_t condition){
     timercondition = condition;
 }
 
-uint32_t check(char guess, char *alreadyGuessed, char *new_name, char *guessWordProgress, uint32_t round)
+uint32_t check( char guess,
+                char *alreadyGuessed,
+                char *wordToGuess,
+                char *guessWordProgress,
+                uint32_t round)
 {
-    uint32_t counter=0;
-    for(uint32_t i = 0; new_name[i] != 0; i++)
+    /**
+       * Funktion um ein Wort von einem Spieler abzufragen und als char Array zurückzugeben 
+       * @param guess  Das aktuell eingegebene Zeichen, welches geprüft werden soll.
+       * @param alreadyGuessed Ein Array, welcher die bereits eingegebenen Zeichen des Nutzers enthält.
+       * @param wordToGuess Ein Array, welcher das Wort, welches erraten werden soll enthält
+       * @param guessWordProgress Ein Array, welcher die Ausgabe des zu erratenden Wortes mit Strichen für fehlende Buchstaben enthält
+       * @param round Ein Integer, welcher die Anzahl der Rateversuche des aktuellen Spiels repräsentiert
+       * 
+       * Die Funktion fragt in einer Endlosschleife Zeichen vom Spieler ab, bis Enter gedrückt wird.
+       * Dabei werden die eingegebenen Zeichen direkt ausgegeben und in einem char Array gespeichert
+       * 
+       * @see main()
+       * @return 0 wenn der geratene Buchstabe falsch ist oder bereits geraten wurde, sonst 1(oder mehr)
+       */
+    uint32_t checkResult=0; 
+    for(uint32_t i = 0; wordToGuess[i] != 0; i++)
     {
         if(guess>=97)
         {
-            if (new_name[i] == guess) {
+            if (wordToGuess[i] == guess) {
                 guessWordProgress[i] = guess;
-                counter++;
+                checkResult++;
             } else {
-                if (new_name[i] == guess - 32) {
+                if (wordToGuess[i] == guess - 32) {
                     guessWordProgress[i] = guess - 32;
-                    counter++;
+                    checkResult++;
                 }
             }
         }
         else
             {
-                if(new_name[i]== guess)
+                if(wordToGuess[i]== guess)
                 {
                     guessWordProgress[i]=guess;
-                    counter++;
+                    checkResult++;
                 }
                 else
                 {
-                    if(new_name[i]==guess+32)
+                    if(wordToGuess[i]==guess+32)
                     {
                         guessWordProgress[i]= guess+32;
-                        counter++;
+                        checkResult++;
                     }
                 }
             }
@@ -59,15 +77,23 @@ uint32_t check(char guess, char *alreadyGuessed, char *new_name, char *guessWord
         {
             if(alreadyGuessed[n] == guess)
             {
-                counter = 0;
+                checkResult = 0;
             }
         }
         alreadyGuessed[round] = guess;
-    return counter;
+    return checkResult;
 }
 
 
-void main(void){
+void main(void /*!<Für den guten Stil*/){
+    /**
+       * Dies ist die main()-Funktion des Hangman Spiels.
+       * Sie beinhaltet eine Endlosschleife, welche einmal
+       * pro gespieltem Spiel durchlaufen wird und nur durch
+       * drücken von 'q' am Ende eines Spiels beendet werden
+       * kann.
+       * @see main()
+       */
     startClock();
     printWelcomeHangman();
     uint32_t wordLength = 0;                                    //Integer in welchem die Länge des zu ratenden Wortes gespeichert wird
@@ -93,11 +119,11 @@ void main(void){
         }
 
 
-        char* userInput = "";
+        char* wordToGuess = "";
         wordLength = 0;
         while (wordLength <1)
         {
-            userInput = getWordInput(&wordLength);            //Hole von einem Spieler das Wort, welches erraten werden soll
+            wordToGuess = getWordInput(&wordLength);            //Hole von einem Spieler das Wort, welches erraten werden soll
         }
         failCount = 0;
         guesses = 0;
@@ -126,7 +152,7 @@ void main(void){
             }
             
 
-            guessResult=check(guess, alreadyGuessed, userInput, guessWordProgress, guesses);
+            guessResult=check(guess, alreadyGuessed, wordToGuess, guessWordProgress, guesses);
             correctGuessCounter=correctGuessCounter+guessResult;
             
 
@@ -195,7 +221,7 @@ void main(void){
         guessText[18]= einerStelleChar;
         printString(guessText);
 
-        printString("Press [q] to quit the game or any other Key to Play again or wait a few seconds!");
+        printString("Press [q] to quit the game or any other Key to Play again or wait a few seconds!\n");
         char nextAction = read_input();
 
         if(nextAction == 'q')

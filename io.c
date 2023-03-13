@@ -2,6 +2,12 @@
 #include "uart.h"
 
 void printWelcomeHangman(void){
+
+  /**
+   * Dies ist eine Methode, um die Willkommensnachricht in ASCII-Art
+   * und die ersten Anweisungen auszugeben.
+   * @see printEndMessage()
+   */
     //Setze Farbe auf Grün(32) und Hintergrund schwarz(40) 2 = dim/faint mode.
     printString("\033[2;32;40m");
     printString("\033[2J");
@@ -30,6 +36,11 @@ void printWelcomeHangman(void){
 }
 //neu
 void printEndMessage(void){
+
+  /**
+       * Dies ist eine Methode, um die Abschiedsnachricht in ASCII-Art auszugeben.
+       * @see printWelcomeHangman()
+       */
     //Setze Farbe auf Grün(32) und Hintergrund schwarz(40) 2 = dim/faint mode.
     printString("\033[2;32;40m");
     printString("\033[2J");
@@ -45,7 +56,17 @@ void printEndMessage(void){
 
 char* getWordInput(uint32_t *size){
 
-
+      /**
+       * Funktion um ein Wort von einem Spieler abzufragen und als char Array zurückzugeben 
+       * @param size Ein Pointer auf eine Integer-Variable, in welcher nach der Eingabe des Nutzers die Länge des eingegebenen Wortes gespeichert wird.
+       * 
+       * Die Funktion fragt in einer Endlosschleife Zeichen vom Spieler ab, bis Enter gedrückt wird.
+       * Dabei werden die eingegebenen Zeichen direkt ausgegeben und in einem char Array gespeichert
+       * 
+       * @see getWordInput()
+       * @see read_input()
+       * @return Das Wort, welches der Spieler eingegeben hat, als char Array
+       */
     
     //Setze Farbe auf Grün(32) und Hintergrund schwarz(40) 2 = dim/faint mode.
     printString("\033[2;32;40m");
@@ -104,8 +125,18 @@ char* getWordInput(uint32_t *size){
 
 }
 
-void printFails(int failCount)
+void printFails(uint32_t failCount)
 {
+  /**
+       * Funktion um die ASCII-Art des Galgens entsprechend des Spielstandes ausuzugeben
+       * @param failCount Ein Integer, welcher angibt, wie viele Fehlversuche der Spieler bereits hatte
+       * 
+       * Diese Funktion gibt die ASCII-Art des Galgens aus. Dabei wird die Zeichnung jedes mal erweitert,
+       * ohne jedes mal alle vorigen Fehlversuche nochmals zu zeichnen.
+       * 
+       * @see printString()
+       * @return Das Wort, welches der Spieler eingegeben hat, als char Array
+       */
   switch(failCount)
   {
     case 1:
@@ -140,6 +171,9 @@ void printFails(int failCount)
 }
     void printFailOne(void)
 {
+  /**
+   * Methode um die ASCII-Art für Einen Fehlversuch auszugeben
+  */
   printString("\033[2;32;40m");
   //printString("\033[2J");
   printString("\033[4;0H");
@@ -156,6 +190,9 @@ void printFails(int failCount)
 
 void printFailTwo(void)
 {
+  /**
+   * Methode um die ASCII-Art für Zwei Fehlversuche auszugeben
+  */
   printString("\033[2;32;40m");
   //printString("\033[2J");
   printString("\033[4;0H");
@@ -176,6 +213,9 @@ void printFailTwo(void)
 }
 void printFailThree(void)
 {
+  /**
+   * Methode um die ASCII-Art für Drei Fehlversuche auszugeben
+  */
   printString("\033[2;32;40m");
   //printString("\033[2J");
   printString("\033[3;0H");
@@ -187,6 +227,9 @@ void printFailThree(void)
 }
 void printFailFour(void)
 {
+  /**
+   * Methode um die ASCII-Art für Vier Fehlversuche auszugeben
+  */
   printString("\033[2;32;40m");
   //printString("\033[2J");
   printString("\033[3;0H");
@@ -199,6 +242,9 @@ void printFailFour(void)
 }
 void printFailFive(void)
 {
+  /**
+   * Methode um die ASCII-Art für Fünf Fehlversuche auszugeben
+  */
   printString("\033[2;32;40m");
   //printString("\033[2J");
   printString("\033[3;0H");
@@ -209,6 +255,9 @@ void printFailFive(void)
 }
 void printFailSix(void)
 {
+  /**
+   * Methode um die ASCII-Art für Sechs Fehlversuche auszugeben
+  */
   printString("\033[2;32;40m");
   //printString("\033[2J");
   printString("\033[3;0H");
@@ -217,6 +266,9 @@ void printFailSix(void)
 }
 void printFailSeven(void)
 {
+  /**
+   * Methode um die ASCII-Art für Sieben Fehlversuche auszugeben
+  */
   printString("\033[2;32;40m");
   //printString("\033[2J");
   printString("\033[3;0H");
@@ -226,6 +278,9 @@ void printFailSeven(void)
 }
 void printFailEight(void)
 {
+  /**
+   * Methode um die ASCII-Art für Acht Fehlversuche auszugeben
+  */
   printString("\033[2;32;40m");
   //printString("\033[2J");
   printString("\033[3;0H");
@@ -234,6 +289,9 @@ void printFailEight(void)
 }
 void printFailNine(void)
 {
+  /**
+   * Methode um die ASCII-Art für Neun Fehlversuche auszugeben
+  */
   printString("\033[2;32;40m");
   //printString("\033[2J");
   printString("\033[3;0H");

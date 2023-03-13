@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 void setTimercondition(uint32_t condition);
-uint32_t check(char guess, char *alreadyGuessed, char *new_name, char *new_empty_name, uint32_t round);
+uint32_t check(char guess, char *alreadyGuessed, char *wordToGuess, char *guessWordProgress, uint32_t guesses);
 void main(void);
 
 
